@@ -6,7 +6,7 @@ Authors@R:
            family = "Goldberg",
            role = c("aut", "cre"),
            email = "jonathangoldberg13@gmail.com",
-           comment = c(@gberg1303))
+           comment = c("@gberg1303"))
 Description: Gets football data from ESPN. Mainly, the packages uses ESPN's api to access data about specific games using their unique id system. 
 License: What license it uses
 Encoding: UTF-8
