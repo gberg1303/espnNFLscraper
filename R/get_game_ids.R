@@ -1,3 +1,11 @@
+#' Get Game IDs
+#'
+#' Pull ESPN's GameIDs for NFL Games
+#' @param season the specific season for which you want to grab gameids from ESPN
+#' @param season_type "preseason", "regular", or "postseason".
+#' @return dataframe with basic game info and espn gameids
+#' @examples
+#' get_game_ids(season = 2019, season_type = "regular")
 #' @export
 get_game_ids <- function(season, season_type = c("preseason", "regular", "postseason")){
   current_year <- as.double(substr(Sys.Date(), 1, 4))

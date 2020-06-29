@@ -1,5 +1,3 @@
-#' Gets a single game's predictions from ESPN. Mainly used as a
-#'
 #' Gets a single game's predictions from ESPN. Mainly used as a helper for get_pregame_predictions
 prediction_helper <- function(espn_game_id){
 
@@ -45,7 +43,7 @@ prediction_helper <- function(espn_game_id){
 #' @param espn_gameids the gameids from espn
 #' @return dataframe with basic game info and pregame home team win probabilities
 #' @examples
-#' get_pregame_predictions(espn_nfl_ids %>% filter(season == 2019 & season_type == 2) %>% pull(espn_gameid))
+#' get_pregame_predictions(espn_gameids = espn_nfl_ids %>% filter(season == 2019 & season_type == 2) %>% pull(espn_gameid))
 #' @export
 get_pregame_predictions <- function(espn_gameids){
   purrr::map_df(espn_gameids, function(x){get_pregame_predictions_helper(x)})

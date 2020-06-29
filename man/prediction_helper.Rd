@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_pregame_predictions.R
 \name{prediction_helper}
 \alias{prediction_helper}
-\title{Gets a single game's predictions from ESPN. Mainly used as a}
+\title{Gets a single game's predictions from ESPN. Mainly used as a helper for get_pregame_predictions}
 \usage{
 prediction_helper(espn_game_id)
 }

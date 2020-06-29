@@ -16,5 +16,5 @@ dataframe with basic game info and pregame home team win probabilities
 Pull and combine pregame predictions from multiple games
 }
 \examples{
-get_pregame_predictions(espn_nfl_ids \%>\% filter(season == 2019 & season_type == 2) \%>\% pull(espn_gameid))
+get_pregame_predictions(espn_gameids = espn_nfl_ids \%>\% filter(season == 2019 & season_type == 2) \%>\% pull(espn_gameid))
 }
