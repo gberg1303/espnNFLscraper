@@ -1,0 +1,21 @@
+Package: espnNFLscraper
+Title: Get ESPN NFL Data via Their API
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Jonathan",
+           family = "Goldberg",
+           role = c("aut", "cre"),
+           email = "jonathangoldberg13@gmail.com",
+           comment = c(@gberg1303))
+Description: Gets football data from ESPN. Mainly, the packages uses ESPN's api to access data about specific games using their unique id system. 
+License: What license it uses
+Encoding: UTF-8
+LazyData: true
+Imports:
+	dplyr,
+	rvest,
+	tidyverse,
+	purrr,
+	tidyr,
+	httr
+RoxygenNote: 7.1.1
