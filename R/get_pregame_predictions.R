@@ -19,8 +19,8 @@ prediction_helper <- function(espn_game_id){
     paste("Pulling predictions for", pregame_predictions$alt_gameid)
   )
 
-  # Grab and conver the Moneylines from Oddsmakers
-  if(!is.null(game_json[["pickcenter"]]) == TRUE){
+  # Grab and convert the Moneylines from Oddsmakers
+  if(rapportools::is.empty(game_json[["pickcenter"]]) == FALSE){
   vegas_odds <- data.frame(
     providers = game_json[["pickcenter"]][["provider.name"]],
     odds = ifelse(game_json[["pickcenter"]][["homeTeamOdds.moneyLine"]] > 0, 100/(game_json[["pickcenter"]][["homeTeamOdds.moneyLine"]] + 100), game_json[["pickcenter"]][["homeTeamOdds.moneyLine"]]/(game_json[["pickcenter"]][["homeTeamOdds.moneyLine"]]-100))
@@ -46,7 +46,7 @@ prediction_helper <- function(espn_game_id){
 #' get_pregame_predictions(espn_gameids = espn_nfl_ids %>% filter(season == 2019 & season_type == 2) %>% pull(espn_gameid))
 #' @export
 get_pregame_predictions <- function(espn_gameids){
-  purrr::map_df(espn_gameids, function(x){get_pregame_predictions_helper(x)})
+  purrr::map_df(espn_gameids, function(x){prediction_helper(x)})
 }
 
 

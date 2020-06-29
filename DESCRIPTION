@@ -17,5 +17,6 @@ Imports:
 	tidyverse,
 	purrr,
 	tidyr,
-	httr
+	httr,
+	rapportools,
 RoxygenNote: 7.1.1
