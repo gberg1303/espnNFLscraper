@@ -76,13 +76,26 @@ get_game_ids <- function(season, season_type = c("preseason", "regular", "postse
       dplyr::mutate(
         season_type = season_type,
         season = season,
-        week = week,
-        alt_gameid = paste0(season, "_", ifelse(week >= 10, paste0(week), paste0(0,week)), "_", away_team, "_", home_team)
+        week = week
       )
 
     espn_game_ids <- dplyr::bind_rows(espn_game_ids, placeholder)
 
+
   }
+
+  ### Fix Several Names for Compatibility with nflfastR Data game_ids
+  espn_game_ids <- espn_game_ids %>%
+    dplyr::mutate(
+      home_team = gsub("WSH", "WAS", home_team),
+      away_team = gsub("WSH", "WAS", away_team),
+      home_team = gsub("LAR", "LA", home_team),
+      away_team = gsub("LAR", "LA", away_team)
+    ) %>%
+  # Add nflfastR game_ids
+    dplyr::mutate(
+      alt_gameid = paste0(season, "_", ifelse(week >= 10, paste0(week), paste0(0,week)), "_", away_team, "_", home_team)
+    )
 
   return(espn_game_ids)
 }
