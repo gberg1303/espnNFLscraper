@@ -20,7 +20,10 @@ prediction_helper <- function(espn_game_id){
   )
 
   # Grab and convert the Moneylines from Oddsmakers
-  if(rapportools::is.empty(game_json[["pickcenter"]]) == FALSE){
+  if("pickcenter" %in% names(game_json) == TRUE &
+     "provider.name" %in% names(game_json[["pickcenter"]]) == TRUE &
+     "homeTeamOdds.moneyLine" %in% names(game_json[["pickcenter"]]) == TRUE
+     ){
   vegas_odds <- data.frame(
     providers = game_json[["pickcenter"]][["provider.name"]],
     odds = ifelse(game_json[["pickcenter"]][["homeTeamOdds.moneyLine"]] > 0, 100/(game_json[["pickcenter"]][["homeTeamOdds.moneyLine"]] + 100), game_json[["pickcenter"]][["homeTeamOdds.moneyLine"]]/(game_json[["pickcenter"]][["homeTeamOdds.moneyLine"]]-100))
