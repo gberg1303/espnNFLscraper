@@ -76,7 +76,7 @@ get_game_ids <- function(season, season_type = c("preseason", "regular", "postse
       dplyr::mutate(
         season_type = season_type,
         season = season,
-        week = week
+        week = ifelse(season_type == 3, 17 + week, week)
       )
 
     espn_game_ids <- dplyr::bind_rows(espn_game_ids, placeholder)

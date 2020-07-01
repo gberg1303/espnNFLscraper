@@ -8,16 +8,20 @@ prediction_helper <- function(espn_game_id){
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(flatten = TRUE)
 
+
   # Pull the game data from the ID dataframe
   pregame_predictions <- espn_nfl_ids %>%
-    dplyr::filter(espn_gameid == espn_game_id) %>%
+    dplyr::filter(espn_gameid == espn_game_id)
+  if("gameProjection" %in% names(game_json[["predictor"]][["homeTeam"]]) == TRUE){
+  pregame_predictions <- pregame_predictions %>%
     dplyr::mutate(
-      home_team_wp = as.numeric(game_json[["predictor"]][["homeTeam"]][["gameProjection"]])
+      espn_home_wp = as.numeric(game_json[["predictor"]][["homeTeam"]][["gameProjection"]])/100
     )
+    message(
+      paste("Pulling predictions for", pregame_predictions$alt_gameid)
+    )
+  }
 
-  message(
-    paste("Pulling predictions for", pregame_predictions$alt_gameid)
-  )
 
   # Grab and convert the Moneylines from Oddsmakers
   if("pickcenter" %in% names(game_json) == TRUE &
