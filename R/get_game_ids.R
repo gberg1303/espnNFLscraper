@@ -1,8 +1,8 @@
 #' Get Game IDs
 #'
 #' Pull ESPN's GameIDs for NFL Games
-#' @param season the specific season for which you want to grab gameids from ESPN
-#' @param season_type "preseason", "regular", or "postseason".
+#' @param season: the specific season for which you want to grab gameids from ESPN
+#' @param season_type: "preseason", "regular", or "postseason".
 #' @return dataframe with basic game info and espn gameids
 #' @examples
 #' get_game_ids(season = 2019, season_type = "regular")
@@ -94,6 +94,7 @@ get_game_ids <- function(season, season_type = c("preseason", "regular", "postse
     ) %>%
   # Add nflfastR game_ids
     dplyr::mutate(
+      week = ifelse(week == 22, week-1, week),
       alt_gameid = paste0(season, "_", ifelse(week >= 10, paste0(week), paste0(0,week)), "_", away_team, "_", home_team)
     )
 

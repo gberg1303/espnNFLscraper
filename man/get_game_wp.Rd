@@ -16,5 +16,6 @@ dataframe with basic espn's WP for each team after plays in the game
 Pull ESPN's WP at each point in the game. Function created by github.com/mrcaseb
 }
 \examples{
+# Pull the espn_gameid already available in the espn_nfl_ids ID dataset
 get_game_wp(espn_gameids = espn_nfl_ids \%>\% filter(season == 2019 & season_type == 2 & week == 1) \%>\% pull(espn_gameid))
 }

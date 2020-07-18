@@ -7,9 +7,9 @@
 get_game_ids(season, season_type = c("preseason", "regular", "postseason"))
 }
 \arguments{
-\item{season}{the specific season for which you want to grab gameids from ESPN}
+\item{season:}{the specific season for which you want to grab gameids from ESPN}
 
-\item{season_type}{"preseason", "regular", or "postseason".}
+\item{season_type:}{"preseason", "regular", or "postseason".}
 }
 \value{
 dataframe with basic game info and espn gameids

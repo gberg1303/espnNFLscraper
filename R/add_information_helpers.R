@@ -2,7 +2,7 @@
 #'
 #' Add the outcomes of completed NFL games and discover if the home team won.
 #' @param espnNFLscraper_dataset : a dataset created by espnNFLscraper
-#' @return dataframe with the outcomes of completed NFL games.
+#' @return Dataframe with the outcomes of completed NFL games.
 #' @examples
 #' get_game_details(espn_gameids = espn_nfl_ids %>% filter(season == 2019 & season_type == 2) %>% pull(espn_gameid)) %>% add_gamescores()
 #' @export
@@ -30,8 +30,8 @@ add_gamescores <- function(espnNFLscraper_dataset){
 #' Add FiveThirtyEight's Elo Predictions
 #'
 #' Add the pregame predictions of FiveThirtyEight's Elo projection system
-#' @param espnNFLscraper_dataset : a dataset created by espnNFLscraper
-#' @return dataframe with 538's predictions appended.
+#' @param espnNFLscraper_dataset: a dataset created by espnNFLscraper
+#' @return Dataframe with 538's predictions appended.
 #' @examples
 #' get_game_details(espn_gameids = espn_nfl_ids %>% filter(season == 2019 & season_type == 2) %>% pull(espn_gameid)) %>% add_fivethirtyeight_predictions()
 #' @export
@@ -59,8 +59,8 @@ add_fivethirtyeight_predictions <- function(espnNFLscraper_dataset){
 
   ### Merge FiveThirtyEight with Weekly Data
   espnNFLscraper_dataset <- espnNFLscraper_dataset %>%
-    left_join(Fast_R_Merger, by = c("alt_gameid" = "game_id", "home_team", "away_team")) %>%
-    left_join(FiveThirtyEight_Elo, by = c( "gameday" = "date", "season", "home_team" = "team1", "away_team" = "team2"))
+    left_join(Fast_R_Merger, by = c("alt_gameid" = "game_id", "home_team", "away_team"), all.x = TRUE) %>%
+    left_join(FiveThirtyEight_Elo, by = c( "gameday" = "date", "season", "home_team" = "team1", "away_team" = "team2"), all.x = TRUE)
 
   return(espnNFLscraper_dataset)
 

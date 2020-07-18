@@ -10,7 +10,7 @@ add_gamescores(espnNFLscraper_dataset)
 \item{espnNFLscraper_dataset}{: a dataset created by espnNFLscraper}
 }
 \value{
-dataframe with the outcomes of completed NFL games.
+Dataframe with the outcomes of completed NFL games.
 }
 \description{
 Add the outcomes of completed NFL games and discover if the home team won.

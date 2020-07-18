@@ -7,10 +7,10 @@
 get_game_details(espn_gameids)
 }
 \arguments{
-\item{espn_gameids}{the gameids from espn}
+\item{espn_gameids:}{The game IDs from ESPN. These can be pulled from the espn_nfl_ids dataset included with the package.}
 }
 \value{
-dataframe with game location, turf type, and officiating crew from multiple games
+Data with game location, turf type, and officiating crew from multiple games
 }
 \description{
 Pull game location, turf type, and officiating crew from multiple games

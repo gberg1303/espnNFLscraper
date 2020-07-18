@@ -7,10 +7,10 @@
 add_fivethirtyeight_predictions(espnNFLscraper_dataset)
 }
 \arguments{
-\item{espnNFLscraper_dataset}{: a dataset created by espnNFLscraper}
+\item{espnNFLscraper_dataset:}{a dataset created by espnNFLscraper}
 }
 \value{
-dataframe with 538's predictions appended.
+Dataframe with 538's predictions appended.
 }
 \description{
 Add the pregame predictions of FiveThirtyEight's Elo projection system

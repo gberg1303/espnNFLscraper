@@ -74,6 +74,7 @@ get_espn_wp_helper <- function(espn_game_id) {
 #' @param espn_gameids the gameids from espn
 #' @return dataframe with basic espn's WP for each team after plays in the game
 #' @examples
+#' # Pull the espn_gameid already available in the espn_nfl_ids ID dataset
 #' get_game_wp(espn_gameids = espn_nfl_ids %>% filter(season == 2019 & season_type == 2 & week == 1) %>% pull(espn_gameid))
 #' @export
 get_game_wp <- function(espn_gameids){

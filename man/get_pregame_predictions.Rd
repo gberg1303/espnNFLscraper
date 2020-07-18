@@ -7,14 +7,15 @@
 get_pregame_predictions(espn_gameids)
 }
 \arguments{
-\item{espn_gameids}{the gameids from espn}
+\item{espn_gameids:}{The game IDs from ESPN. These can be pulled from the espn_nfl_ids dataset included with the package.}
 }
 \value{
-dataframe with basic game info and pregame home team win probabilities
+Data with basic game info and pregame home team win probabilities
 }
 \description{
 Pull and combine pregame predictions from multiple games
 }
 \examples{
-get_pregame_predictions(espn_gameids = espn_nfl_ids \%>\% filter(season == 2019 & season_type == 2) \%>\% pull(espn_gameid))
+# Pull the espn_gameid already available in the espn_nfl_ids ID dataset
+get_pregame_predictions(espn_nfl_ids \%>\% filter(season == 2019 & season_type == 2) \%>\% pull(espn_gameid))
 }

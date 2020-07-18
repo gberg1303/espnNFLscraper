@@ -47,10 +47,11 @@ prediction_helper <- function(espn_game_id){
 #' Get Pregame Predictions
 #'
 #' Pull and combine pregame predictions from multiple games
-#' @param espn_gameids the gameids from espn
-#' @return dataframe with basic game info and pregame home team win probabilities
+#' @param espn_gameids: The game IDs from ESPN. These can be pulled from the espn_nfl_ids dataset included with the package.
+#' @return Data with basic game info and pregame home team win probabilities
 #' @examples
-#' get_pregame_predictions(espn_gameids = espn_nfl_ids %>% filter(season == 2019 & season_type == 2) %>% pull(espn_gameid))
+#' # Pull the espn_gameid already available in the espn_nfl_ids ID dataset
+#' get_pregame_predictions(espn_nfl_ids %>% filter(season == 2019 & season_type == 2) %>% pull(espn_gameid))
 #' @export
 get_pregame_predictions <- function(espn_gameids){
   purrr::map_df(espn_gameids, function(x){prediction_helper(x)})

@@ -41,8 +41,8 @@ get_game_details_helper <- function(espn_game_id){
 #' Get Game Details
 #'
 #' Pull game location, turf type, and officiating crew from multiple games
-#' @param espn_gameids the gameids from espn
-#' @return dataframe with game location, turf type, and officiating crew from multiple games
+#' @param espn_gameids: The game IDs from ESPN. These can be pulled from the espn_nfl_ids dataset included with the package.
+#' @return Data with game location, turf type, and officiating crew from multiple games
 #' @examples
 #' get_game_details(espn_gameids = espn_nfl_ids %>% filter(season == 2019 & season_type == 2) %>% pull(espn_gameid))
 #' @export
