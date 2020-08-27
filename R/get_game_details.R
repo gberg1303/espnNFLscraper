@@ -24,6 +24,11 @@ get_game_details_helper <- function(espn_game_id){
   if(is.null(game_json[["gameInfo"]][["officials"]]) == FALSE){
     officials <- game_json[["gameInfo"]][["officials"]] %>%
       dplyr::select(displayName, position.name) %>%
+      dplyr::group_by(position.name) %>%
+      dplyr::mutate(rank = order(position.name)) %>%
+      dplyr::ungroup() %>%
+      mutate(position.name = ifelse(rank > 1, paste(rank, position.name), position.name)) %>%
+      dplyr::select(-rank) %>%
       tidyr::pivot_wider(names_from = position.name, values_from = displayName)
 
     # Merge officials back
