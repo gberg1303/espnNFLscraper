@@ -37,52 +37,53 @@ get_game_ids <- function(season, season_type = c("preseason", "regular", "postse
 
   weeks <- ifelse(season_type == "2", 17, 5)
 
-    for(week in 1:weeks){
-    url <- glue::glue("https://www.espn.com/nfl/schedule/_/week/{week}/year/{season}/seasontype/{season_type}")
+   espn_game_ids <- purrr::map_df(1:weeks, function(week){
+      url <- glue::glue("https://www.espn.com/nfl/schedule/_/week/{week}/year/{season}/seasontype/{season_type}")
 
-    webpage <- xml2::read_html(url)
+      webpage <- xml2::read_html(url)
 
-    links <- webpage %>%
-      rvest::html_nodes("a") %>%
-      rvest::html_attr("href")
+      links <- webpage %>%
+        rvest::html_nodes("a") %>%
+        rvest::html_attr("href")
 
-    espn_gameid <- links %>%
-      as.tibble() %>%
-      dplyr::filter(str_detect(value, "gameId") == TRUE) %>%
-      dplyr::pull(value) %>%
-      stringr::str_remove(., "/nfl/game/_/gameId/")
+      espn_gameid <- links %>%
+        as.tibble() %>%
+        dplyr::filter(str_detect(value, "gameId") == TRUE) %>%
+        dplyr::pull(value) %>%
+        stringr::str_remove(., "/nfl/game/_/gameId/")
 
-    bye_teams <- webpage %>%
-      rvest::html_nodes(".odd.byeweek" ) %>%
-      rvest::html_nodes("abbr") %>%
-      rvest::html_text()
+      bye_teams <- webpage %>%
+        rvest::html_nodes(".odd.byeweek" ) %>%
+        rvest::html_nodes("abbr") %>%
+        rvest::html_text()
 
-    home_team <- webpage %>%
-      rvest::html_nodes(".home-wrapper") %>%
-      rvest::html_nodes("abbr") %>%
-      rvest::html_text()
+      home_team <- webpage %>%
+        rvest::html_nodes(".home-wrapper") %>%
+        rvest::html_nodes("abbr") %>%
+        rvest::html_text()
 
-    away_team <- webpage %>%
-      rvest::html_nodes("abbr") %>%
-      rvest::html_text()
-    away_team <- away_team[!away_team %in% home_team]
-    away_team <- away_team[!away_team %in% bye_teams]
+      away_team <- webpage %>%
+        rvest::html_nodes("abbr") %>%
+        rvest::html_text()
+      away_team <- away_team[!away_team %in% home_team]
+      away_team <- away_team[!away_team %in% bye_teams]
 
-    placeholder <- data.frame(
-      home_team,
-      away_team,
-      espn_gameid
-    ) %>%
-      dplyr::mutate(
-        season_type = season_type,
-        season = season,
-        week = ifelse(season_type == 3, 17 + week, week)
+      placeholder <- data.frame(
+        home_team,
+        away_team,
+        espn_gameid
+      ) %>%
+        dplyr::mutate(
+          season_type = season_type,
+          season = season,
+          week = ifelse(season_type == 3, 17 + week, week)
+        )
+
+      espn_game_ids <- dplyr::bind_rows(espn_game_ids, placeholder)
+      return(espn_game_ids)
+
+    }
       )
-
-    espn_game_ids <- dplyr::bind_rows(espn_game_ids, placeholder)
-
-
-  }
 
   ### Fix Several Names for Compatibility with nflfastR Data game_ids
   espn_game_ids <- espn_game_ids %>%
