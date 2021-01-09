@@ -10,8 +10,12 @@ prediction_helper <- function(espn_game_id){
 
 
   # Pull the game data from the ID dataframe
-  pregame_predictions <- espn_nfl_ids %>%
-    dplyr::filter(espn_gameid == espn_game_id)
+  pregame_predictions <- readRDS(url("http://www.habitatring.com/games_alt.rds")) %>%
+    dplyr::filter(espn == espn_game_id) %>%
+    dplyr::select(home_team, away_team, espn, season, week, game_id) %>%
+    dplyr::mutate(season_type = ifelse(week >= 18, 3, 2)) %>%
+    dplyr::rename(alt_gameid = game_id,
+                  espn_gameid = espn)
   if("gameProjection" %in% names(game_json[["predictor"]][["homeTeam"]]) == TRUE){
   pregame_predictions <- pregame_predictions %>%
     dplyr::mutate(

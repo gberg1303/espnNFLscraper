@@ -1,6 +1,7 @@
 #' Get Game IDs
 #'
 #' Pull ESPN's GameIDs for NFL Games
+#' @import dplyr
 #' @param season: the specific season for which you want to grab gameids from ESPN
 #' @param season_type: "preseason", "regular", or "postseason".
 #' @return dataframe with basic game info and espn gameids
@@ -47,7 +48,7 @@ get_game_ids <- function(season, season_type = c("preseason", "regular", "postse
         rvest::html_attr("href")
 
       espn_gameid <- links %>%
-        as.tibble() %>%
+        tibble::as.tibble() %>%
         dplyr::filter(str_detect(value, "gameId") == TRUE) %>%
         dplyr::pull(value) %>%
         stringr::str_remove(., "/nfl/game/_/gameId/")
